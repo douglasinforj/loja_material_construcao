@@ -136,3 +136,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Configurando autenticação com as class subscritas(importante)
 AUTH_USER_MODEL = 'usuarios.Users'
+
+# Role permissions
+
+ROLEPERMISSIONS_MODULE = 'construct.roles'    #informando o caminho do arquivo
