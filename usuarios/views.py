@@ -6,4 +6,4 @@ from rolepermissions.decorators import has_permission_decorator     #importamos 
 
 @has_permission_decorator('cadastra_vendedor')      #informamos qual a permissão o usuário que tiver poderá acessar
 def cadastrar_vendedor(request):
-    return HttpResponse('Teste')
+    return render(request, 'usuarios/cadastrar_vendedor.html')
