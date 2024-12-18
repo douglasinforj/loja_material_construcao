@@ -6,8 +6,10 @@ from .models import Users
 class UserChangeForm(forms.UserChangeForm):
     class Meta(forms.UserChangeForm.Meta):
         model = Users                       #indicaremos qual o model utilizar
+        
 
 #sobrescrevendo os forms para usar o nosso personalizado
 class UserCreationForm(forms.UserCreationForm):
     class Meta(forms.UserCreationForm.Meta):
         model = Users                       #indicaremos qual o model utilizar
+        
