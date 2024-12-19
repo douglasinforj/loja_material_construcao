@@ -53,3 +53,8 @@ def login(request):
         auth.login(request, user)
         #TODO: tratar do redirecionamento
         return HttpResponse('Usuário logado com sucesso')
+    
+
+def logout(request):
+    request.session.flush()     #limpar a sessao do login do usuário
+    return redirect(reverse(login))
