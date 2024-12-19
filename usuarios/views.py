@@ -6,6 +6,7 @@ from rolepermissions.decorators import has_permission_decorator     #importamos 
 
 from django.shortcuts import redirect     #faz o redirecionamento de pagina
 from django.urls import reverse           #transforma o nome da url na url de fato   
+from django.contrib import auth           #modulo verifica autenticação
 
 
 
@@ -34,5 +35,21 @@ def cadastrar_vendedor(request):
 def login(request):
     if request.method == "GET":
         if request.user.is_authenticated:           #caso  o usuario esteja logado
-            return redirect(reverse('login'))       #reverse esta transformando o nome na urls completa
+            return redirect(reverse('plataforma'))       #reverse esta transformando o nome na urls completa
         return render(request, 'usuarios/login.html')        #caso não esteja logado é retornado a pagina de login
+    #caso não loogado
+    elif request.method == "POST":
+        login = request.POST.get('email')
+        senha = request.POST.get('senha')
+
+        #verifica se os dados são validos do banco de dados:
+        user = auth.authenticate(username=login, password=senha)
+
+        if not user:
+            #TODO: Redirecionar com mensagem de erro
+            return HttpResponse('Usuário inválido')
+        
+        #se ele existe:
+        auth.login(request, user)
+        #TODO: tratar do redirecionamento
+        return HttpResponse('Usuário logado com sucesso')
