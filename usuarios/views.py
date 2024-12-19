@@ -14,7 +14,11 @@ from django.contrib import auth           #modulo verifica autenticação
 @has_permission_decorator('cadastra_vendedor')      #informamos qual a permissão o usuário que tiver poderá acessar
 def cadastrar_vendedor(request):
     if request.method == "GET":
-        return render(request, 'usuarios/cadastrar_vendedor.html')
+
+        #retornar os vendedores para iterar com a listagem de vendedores:
+        vendedores = Users.objects.filter(cargo="V")
+        return render(request, 'usuarios/cadastrar_vendedor.html', {'vendedores': vendedores})  
+
     if request.method == "POST":
         #capturar dados do formulário:
         email = request.POST.get('email')
