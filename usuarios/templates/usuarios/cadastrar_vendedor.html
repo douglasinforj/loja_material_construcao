@@ -30,13 +30,15 @@
             <tbody>
 
                 <!--Adicionar o for do django, quem vai ser responsavel de iterar e adicionar as linhas-->
-                {% for i in %}
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
+                {% for vendedor in vendedores %}
+                    <tr>
+                        <th>{{vendedor.first_name}}</th>
+                        <td>{{vendedor.last_name}}</td>
+                        <td>{{vendedor.email}}</td>
+                        <td>{{vendedor.last_login}}</td>
+                        <td><a class="btn btn-danger">EXCLUIR</a></td>
+
+                    </tr>
                 {% endfor %}
               
             </tbody>
