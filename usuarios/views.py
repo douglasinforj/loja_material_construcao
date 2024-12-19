@@ -4,6 +4,11 @@ from .models import Users
 
 from rolepermissions.decorators import has_permission_decorator     #importamos as permissoes criadas no arquivo role
 
+from django.shortcuts import redirect     #faz o redirecionamento de pagina
+from django.urls import reverse           #transforma o nome da url na url de fato   
+
+
+
 
 @has_permission_decorator('cadastra_vendedor')      #informamos qual a permissão o usuário que tiver poderá acessar
 def cadastrar_vendedor(request):
@@ -25,3 +30,9 @@ def cadastrar_vendedor(request):
 
         # TODO: Redirecionar com uma mensagem
         return HttpResponse('Conta criada')
+
+def login(request):
+    if request.method == "GET":
+        if request.user.is_authenticated:           #caso  o usuario esteja logado
+            return redirect(reverse('login'))       #reverse esta transformando o nome na urls completa
+        return render(request, 'usuarios/login.html')        #caso não esteja logado é retornado a pagina de login
