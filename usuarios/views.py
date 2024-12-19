@@ -8,6 +8,7 @@ from django.shortcuts import redirect     #faz o redirecionamento de pagina
 from django.urls import reverse           #transforma o nome da url na url de fato   
 from django.contrib import auth           #modulo verifica autenticação
 
+from django.shortcuts import get_object_or_404
 
 
 
@@ -62,3 +63,12 @@ def login(request):
 def logout(request):
     request.session.flush()     #limpar a sessao do login do usuário
     return redirect(reverse(login))
+
+
+@has_permission_decorator('cadastrar_vendedor')  #incluido permissão de quem pode excluir os vendedores, aqui será quem pode cadastrar tbm
+def excluir_usuario(request, id):
+    vendedor = get_object_or_404(Users, id=id)  #buscara os dados se não existir retorna 404. Passammos onde vai buscar Users e o id passado pela urls
+    vendedor.delete()
+    return redirect(reverse('cadastrar_vendedor'))
+
+
