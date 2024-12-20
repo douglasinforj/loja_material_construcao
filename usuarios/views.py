@@ -10,6 +10,8 @@ from django.contrib import auth           #modulo verifica autenticação
 
 from django.shortcuts import get_object_or_404
 
+from django.contrib import messages       #mensagens de alerta configurado no settings
+
 
 
 @has_permission_decorator('cadastra_vendedor')      #informamos qual a permissão o usuário que tiver poderá acessar
@@ -69,6 +71,7 @@ def logout(request):
 def excluir_usuario(request, id):
     vendedor = get_object_or_404(Users, id=id)  #buscara os dados se não existir retorna 404. Passammos onde vai buscar Users e o id passado pela urls
     vendedor.delete()
+    messages.add_message(request, messages.SUCCESS, 'Vendedor Excluido com Sucesso!')    #adicionando menssagem de Sucesso ou de erros ou alertas, configuradas no settings
     return redirect(reverse('cadastrar_vendedor'))
 
 
