@@ -24,6 +24,8 @@ def cadastrar_vendedor(request):
 
     if request.method == "POST":
         #capturar dados do formulário:
+        nome = request.POST.get('nome')
+        sobrenome = request.POST.get('sobrenome')
         email = request.POST.get('email')
         senha = request.POST.get('senha')
 
@@ -34,14 +36,14 @@ def cadastrar_vendedor(request):
             return HttpResponse('Email já existe')
         
         #caso não exista:
-        user = Users.objects.create_user(username=email, email=email, password=senha, cargo="V") #o django utiliza o username para autenticar, vamos injetar o email no user name
+        user = Users.objects.create_user(username=email, email=email, password=senha, first_name=nome, last_name=sobrenome, cargo="V") #o django utiliza o username para autenticar, vamos injetar o email no user name
 
         # TODO: Redirecionar com uma mensagem
         return HttpResponse('Conta criada')
 
 def login(request):
     if request.method == "GET":
-        if request.user.is_authenticated:           #caso  o usuario esteja logado
+        if request.user.is_authenticated:                #caso  o usuario esteja logado
             return redirect(reverse('plataforma'))       #reverse esta transformando o nome na urls completa
         return render(request, 'usuarios/login.html')        #caso não esteja logado é retornado a pagina de login
     #caso não loogado
