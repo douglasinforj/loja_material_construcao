@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from django.contrib.messages import constants
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -140,3 +141,14 @@ AUTH_USER_MODEL = 'usuarios.Users'
 # Role permissions
 
 ROLEPERMISSIONS_MODULE = 'construct.roles'    #informando o caminho do arquivo
+
+
+# Messages
+
+MESSAGE_TAGS = {
+    constants.DEBUG: 'alert-primary',
+    constants.DEBUG: 'alert-danger',
+    constants.DEBUG: 'alert-success',
+    constants.DEBUG: 'alert-info',
+    constants.DEBUG: 'alert-warning'
+}
