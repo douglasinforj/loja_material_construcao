@@ -29,6 +29,8 @@ def cadastrar_vendedor(request):
         email = request.POST.get('email')
         senha = request.POST.get('senha')
 
+        #TODO: Fazer Validações dos dados
+
         #verificar se email ja existe:
         user = Users.objects.filter(email=email)
         if user.exists():
